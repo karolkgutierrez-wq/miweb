@@ -476,7 +476,7 @@
         </a>
       </div>
       <div class="contact-form reveal reveal-delay-2">
-        <form id="contact-form" novalidate>
+        <form action="https://formspree.io/f/xgorjanl" method="POST">
           <div class="form-row">
             <div class="form-group"><label for="nombre">Name</label><input type="text" id="nombre" name="nombre" placeholder="Your name" required /></div>
             <div class="form-group"><label for="correo">Email</label><input type="email" id="correo" name="correo" placeholder="you@email.com" required /></div>
@@ -526,13 +526,7 @@
 </footer>
 
 <script>
-  // Google Forms integration
-  const GF_URL     = "https://docs.google.com/forms/d/e/1FAIpQLSdKgP2NrzEjl9UsOMHeaNUDDj4H3lv9IV1HYJfk83da7CR8oA/formResponse";
-  const GF_NOMBRE  = "entry.386675513";
-  const GF_CORREO  = "entry.479436613";
-  const GF_AGENCIA = "entry.806503244";
-  const GF_SOPORTE = "entry.325061881";
-  const GF_MENSAJE = "entry.1503424226";
+ 
 
   const gfIframe = document.createElement("iframe");
   gfIframe.name = "gf-hidden";
@@ -558,63 +552,9 @@
     link.addEventListener("click", () => { mobileMenu.classList.remove("open"); hamburger.setAttribute("aria-expanded", "false"); });
   });
 
-  // Form submit via Google Forms
-  document.getElementById("contact-form").addEventListener("submit", function(e) {
-    e.preventDefault();
-    const btn     = document.getElementById("submit-btn");
-    const success = document.getElementById("form-success");
-    const error   = document.getElementById("form-error");
 
-    const nombre  = document.getElementById("nombre").value.trim();
-    const correo  = document.getElementById("correo").value.trim();
-    const agencia = document.getElementById("agencia").value.trim();
-    const soporte = document.getElementById("soporte").value;
-    const mensaje = document.getElementById("mensaje").value.trim();
-
-    if (!nombre || !correo || !soporte || !mensaje) {
-      error.textContent = "Please fill in all required fields.";
-      error.style.display = "block";
-      setTimeout(() => { error.style.display = "none"; }, 4000);
-      return;
-    }
-
-    btn.textContent = "Sending...";
-    btn.disabled = true;
-    success.style.display = "none";
-    error.style.display = "none";
-
-    const gfForm = document.createElement("form");
-    gfForm.action = GF_URL;
-    gfForm.method = "POST";
-    gfForm.target = "gf-hidden";
-
-    const fields = {
-      [GF_NOMBRE]: nombre,
-      [GF_CORREO]: correo,
-      [GF_AGENCIA]: agencia,
-      [GF_SOPORTE]: soporte,
-      [GF_MENSAJE]: mensaje
-    };
-
-    Object.entries(fields).forEach(([name, value]) => {
-      const input = document.createElement("input");
-      input.type = "hidden";
-      input.name = name;
-      input.value = value;
-      gfForm.appendChild(input);
-    });
-
-    document.body.appendChild(gfForm);
-    gfForm.submit();
-    document.body.removeChild(gfForm);
-
-    setTimeout(() => {
-      success.style.display = "block";
-      document.getElementById("contact-form").reset();
-      btn.textContent = "Send my project";
-      btn.disabled = false;
-    }, 1000);
-  });
+  
+ 
 </script>
 
 </body>
